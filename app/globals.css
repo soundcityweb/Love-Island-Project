@@ -1,72 +1,263 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-outfit), sans-serif;
-  background: linear-gradient(160deg, #ff6b35 0%, #f72585 45%, #7209b7 100%);
-  overflow: hidden;
-}
+/**
+ * Love Island Nigeria — Brand Design Tokens
+ *
+ * Primary palette (sun, heat, romance):
+ *   Coral-Pink  #FF4D80  HSL 348 100% 65%
+ *   Sand        #F9E9B9  HSL  45  84% 85%
+ *   Warm Dark   #160810  HSL 338  28%  7%  (replaces cold navy)
+ *
+ * Secondary / CTA palette:
+ *   Hot Pink  #FF36A0  HSL 328 100% 61%   ← primary CTA / interactive
+ *   Yellow    #FCFB3A  HSL  60  97% 61%
+ *   Orange    #FF7A17  HSL  26 100% 55%
+ *
+ * Additional:
+ *   Deep Red  #C40610  HSL 357  94% 40%
+ *   Purple    #580CE3  HSL 261  88% 47%
+ *   Lime      #A3FF36  HSL  93 100% 61%
+ *
+ * Typography: Nunito (Century Gothic web-equivalent)
+ * Logo-only:  Josefin Sans (brand spec, not used in UI text)
+ */
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 80%, rgba(255, 214, 10, 0.25) 0%, transparent 40%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 35%);
-  pointer-events: none;
-}
+@layer base {
+  :root {
+    /* ── Surfaces ────────────────────────────────────── */
+    --background:        28  40%  99%;   /* warm near-white       */
+    --foreground:       338  28%   8%;   /* deep rose-black       */
 
-.container {
-  position: relative;
-  text-align: center;
-  padding: 3rem 2rem;
-  max-width: 900px;
-}
+    --card:              28  50%  98%;   /* warm cream            */
+    --card-foreground:  338  28%   8%;
 
-h1 {
-  font-family: var(--font-bebas), sans-serif;
-  font-size: clamp(2.5rem, 10vw, 5.5rem);
-  letter-spacing: 0.08em;
-  line-height: 1.05;
-  color: #fff;
-  text-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.25),
-    0 0 60px rgba(255, 214, 10, 0.4);
-  animation: fadeUp 1s ease-out both;
-}
+    --popover:           28  50%  98%;
+    --popover-foreground: 338  28%   8%;
 
-.accent {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.35em;
-  letter-spacing: 0.35em;
-  color: #ffd60a;
-}
+    /* ── Brand interactive ───────────────────────────── */
+    --primary:          348 100%  61%;   /* coral-pink #FF4D80    */
+    --primary-foreground: 0   0% 100%;
 
-.divider {
-  width: 80px;
-  height: 4px;
-  margin: 2rem auto;
-  background: linear-gradient(90deg, transparent, #ffd60a, transparent);
-  border-radius: 2px;
-  animation: fadeUp 1s 0.2s ease-out both;
-}
+    /* ── Brand identity ─────────────────────────────── */
+    --secondary:         22  95%  60%;   /* coral-orange          */
+    --secondary-foreground: 0   0% 100%;
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+    /* ── Neutrals ────────────────────────────────────── */
+    --muted:             28  35%  93%;   /* warm parchment        */
+    --muted-foreground:  20  18%  44%;   /* warm mid-grey         */
+
+    /* ── Accent ─────────────────────────────────────── */
+    --accent:            26 100%  55%;   /* Orange #FF7A17        */
+    --accent-foreground:  0   0% 100%;
+
+    /* ── Semantic ────────────────────────────────────── */
+    --destructive:      357  94%  40%;   /* Deep Red #C40610      */
+    --destructive-foreground: 0   0% 100%;
+
+    /* ── Chrome ──────────────────────────────────────── */
+    --border:            28  25%  87%;
+    --input:             28  20%  91%;
+    --ring:             348 100%  61%;
+
+    /* ── Charts ──────────────────────────────────────── */
+    --chart-1:          348 100%  61%;   /* coral-pink  */
+    --chart-2:           22  95%  60%;   /* orange      */
+    --chart-3:           26 100%  55%;   /* amber       */
+    --chart-4:           60  97%  61%;   /* yellow      */
+    --chart-5:          280  75%  60%;   /* purple      */
+
+    /* ── Shape ───────────────────────────────────────── */
+    --radius: 1rem;
+
+    /* ── Sidebar ─────────────────────────────────────── */
+    --sidebar-background:            28  30%  98%;
+    --sidebar-foreground:           338  20%  20%;
+    --sidebar-primary:              348 100%  61%;
+    --sidebar-primary-foreground:     0   0% 100%;
+    --sidebar-accent:                28  35%  93%;
+    --sidebar-accent-foreground:    338  20%  20%;
+    --sidebar-border:                28  25%  87%;
+    --sidebar-ring:                 348 100%  61%;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  /**
+   * Dark mode — "night at the villa"
+   * Deep rose-black backgrounds, coral CTAs pop,
+   * warm cream text and amber accents.
+   */
+  .dark {
+    --background:       338  35%   6%;   /* deep rose-black night */
+    --foreground:        28  50%  95%;   /* warm cream            */
+
+    --card:             338  30%   9%;
+    --card-foreground:   28  50%  95%;
+
+    --popover:          338  30%   9%;
+    --popover-foreground: 28  50%  95%;
+
+    --primary:          348 100%  63%;
+    --primary-foreground: 0   0% 100%;
+
+    --secondary:        338  30%  18%;
+    --secondary-foreground: 28  50%  88%;
+
+    --muted:            338  22%  16%;
+    --muted-foreground:  28  18%  58%;
+
+    --accent:            26 100%  55%;
+    --accent-foreground:  0   0% 100%;
+
+    --destructive:      357  70%  45%;
+    --destructive-foreground: 0   0% 100%;
+
+    --border:           338  25%  18%;
+    --input:            338  25%  18%;
+    --ring:             348 100%  63%;
+
+    --chart-1:          348 100%  63%;
+    --chart-2:           22  95%  60%;
+    --chart-3:           26 100%  55%;
+    --chart-4:           60  97%  61%;
+    --chart-5:          280  70%  60%;
+
+    --sidebar-background:           338  35%   5%;
+    --sidebar-foreground:            28  28%  90%;
+    --sidebar-primary:              348 100%  63%;
+    --sidebar-primary-foreground:     0   0% 100%;
+    --sidebar-accent:               338  28%  14%;
+    --sidebar-accent-foreground:     28  28%  90%;
+    --sidebar-border:               338  25%  18%;
+    --sidebar-ring:                 348 100%  63%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* ── Scroll-driven section entrance ──────────────────────────────
+   * Uses CSS scroll-driven animations (Chrome 115+, Safari 17.2+,
+   * Firefox 114+). Wrapped in @supports so unsupported browsers
+   * simply show content at full opacity — no JS required.
+   * ─────────────────────────────────────────────────────────────── */
+  @supports (animation-timeline: view()) {
+    .animate-on-scroll {
+      animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 22%;
+    }
+    .animate-on-scroll-delay {
+      animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 26%;
+    }
+  }
+
+  /* Coral-to-orange CTA gradient — the primary button style */
+  .btn-gradient {
+    background: linear-gradient(135deg, #FF4D80 0%, #FF7A17 100%);
+  }
+  .btn-gradient:hover {
+    filter: brightness(1.08);
+  }
+
+  /* Warm glowing shadows for cards and featured elements */
+  .shadow-warm {
+    box-shadow:
+      0 4px 20px -4px rgba(255, 70, 100, 0.22),
+      0 2px 8px  -2px rgba(255, 110, 30, 0.14);
+  }
+  .shadow-warm-lg {
+    box-shadow:
+      0 12px 40px -8px rgba(255, 70, 100, 0.32),
+      0  4px 16px -4px rgba(255, 110, 30, 0.20);
+  }
+
+  /* Coral-to-orange gradient (updated) */
+  .bg-li-gradient {
+    background: linear-gradient(135deg, #FF4D80 0%, #FF7A17 100%);
+  }
+
+  /* Sunset gradient — magenta to orange to gold */
+  .bg-li-sunset {
+    background: linear-gradient(135deg, #FF36A0 0%, #FF7A17 55%, #FCFB3A 100%);
+  }
+
+  /* Vote confirmation — dramatic entrance after submit */
+  @keyframes vote-success-reveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.94) translateY(20px);
+      filter: blur(6px);
+    }
+    55% {
+      opacity: 1;
+      transform: scale(1.02) translateY(-2px);
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0);
+    }
+  }
+  .animate-vote-success-reveal {
+    animation: vote-success-reveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes vote-success-glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 0 rgba(255, 77, 128, 0.45),
+        0 12px 40px -8px rgba(255, 110, 30, 0.35);
+    }
+    50% {
+      box-shadow:
+        0 0 32px 8px rgba(255, 77, 128, 0.35),
+        0 12px 40px -8px rgba(255, 110, 30, 0.45);
+    }
+  }
+  .animate-vote-success-glow {
+    animation: vote-success-glow 2s ease-in-out infinite;
+  }
+
+  /* Checkout — soft entrance (no JS) */
+  @keyframes checkout-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-checkout-fade-up {
+    animation: checkout-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-checkout-delay-1 {
+    animation-delay: 0.09s;
+  }
+  .animate-checkout-delay-2 {
+    animation-delay: 0.18s;
+  }
+  .animate-checkout-delay-3 {
+    animation-delay: 0.26s;
   }
 }
