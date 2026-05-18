@@ -1,14 +1,16 @@
 {
   "name": "love-island-nigeria",
   "version": "1.0.0",
-  "description": "Love Island Nigeria — Node.js Express website",
-  "main": "server.js",
+  "private": true,
   "scripts": {
-    "build": "node scripts/build.js",
-    "start": "node server.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "next": "^15.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "engines": {
     "node": "22.x"
