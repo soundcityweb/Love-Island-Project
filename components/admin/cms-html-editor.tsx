@@ -34,12 +34,12 @@ export function CmsHtmlEditor({ value, onChange, disabled }: CmsHtmlEditorProps)
         value={value}
         onEditorChange={(c) => onChange(c)}
         disabled={disabled}
+        {...(!cloudKey ? { licenseKey: "gpl" } : {})}
         init={{
           height: 420,
           menubar: true,
           branding: false,
           promotion: false,
-          ...(!cloudKey ? { license_key: "gpl" } : {}),
           plugins: "lists link image code table autoresize wordcount",
           toolbar:
             "undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist | link image table | code removeformat",
