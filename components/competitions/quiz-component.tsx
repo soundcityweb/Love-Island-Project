@@ -187,7 +187,7 @@ export function QuizComponent({ questions, slug, onComplete }: QuizComponentProp
         return
       }
 
-      onComplete(data as SubmitResult, answers)
+      onComplete(data as unknown as SubmitResult, answers)
     } catch {
       setSubmitError("Network error. Please check your connection.")
     } finally {
