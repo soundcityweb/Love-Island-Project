@@ -41,6 +41,8 @@
     "@tanstack/react-query": "^5.96.0",
     "@tinymce/tinymce-react": "^6.3.0",
     "autoprefixer": "^10.4.20",
+    "postcss": "^8.5",
+    "tailwindcss": "^3.4.17",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
@@ -71,8 +73,6 @@
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@types/sanitize-html": "^2.16.1",
-    "postcss": "^8.5",
-    "tailwindcss": "^3.4.17",
     "typescript": "5.7.3"
   },
   "pnpm": {
