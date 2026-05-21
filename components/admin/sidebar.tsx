@@ -451,7 +451,7 @@ export function AdminSidebar({
         <div className="flex h-16 shrink-0 items-center border-b border-sidebar-border px-3">
           <div
             className={cn(
-              "flex min-w-0 flex-1 items-center transition-all duration-300",
+              "flex min-w-0 flex-1 items-center transition-all duration-300 ml-2",
               isCollapsed ? "mx-auto justify-center" : "gap-1",
             )}
           >
